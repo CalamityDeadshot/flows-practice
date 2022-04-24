@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/root"
+    tools:context=".ComparisonActivity">
+
+    <TextView
+        android:id="@+id/live_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hello world!"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/livedata_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="LiveData" />
+
+
+    <TextView
+        android:id="@+id/stateflow_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hello world!"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/stateflow_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="State flow" />
+
+
+    <TextView
+        android:id="@+id/flow_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hello world!"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/flow_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Flow" />
+
+
+    <TextView
+        android:id="@+id/sharedflow_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hello world!"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/sharedflow_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Shared flow" />
+
+
+</LinearLayout>
