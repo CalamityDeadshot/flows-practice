@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,38 +20,29 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<Button>(R.id.button).setOnClickListener {
-            lifecycleScope.launch {
-                countingFlow.collect {
-                    Log.v("Flows", "Received after click $it")
-                }
-            }
-        }
-
-
         lifecycleScope.launchWhenStarted {
-            countingFlow
-                .buffer()
-                .filter { it % 2 == 0 }
-                .collect {
-                    delay(2000)
-                    Log.v("Flows", "Received $it")
-                }
-        }
-
-        countingFlow.collectOn(lifecycleScope, this) {
-
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                delay(2000)
+                countingFlow
+                    .buffer()
+                    .cancellable()
+                    .filter { it % 2 == 0 }
+                    .map { it * it }
+                    .collect {
+                        Log.v("Flows", it.toString())
+                    }
+            }
         }
 
     }
 }
 
 fun <T> Flow<T>.collectOn(
-    scope: LifecycleCoroutineScope,
-    lifecycle: LifecycleOwner,
+    coroutineScope: LifecycleCoroutineScope,
+    lifecycleOwner: LifecycleOwner,
     collector: FlowCollector<T>
-) = scope.launchWhenStarted {
-    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+) = coroutineScope.launchWhenStarted {
+    lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
         collect(collector)
     }
 }

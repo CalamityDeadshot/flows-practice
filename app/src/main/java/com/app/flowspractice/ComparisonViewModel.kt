@@ -23,16 +23,20 @@ class ComparisonViewModel : ViewModel() {
     val sharedFlow = _sharedFlow.asSharedFlow()
 
 
+    var errorCounter = 0
+
     fun onLiveDataClick() {
         _liveData.value = "LiveData"
     }
 
     fun onStateFlowClick() {
-        _stateFlow.value = "StateFlow"
+        errorCounter++
+        _stateFlow.value = "Error $errorCounter"
     }
 
     fun onSharedFlowClick() = viewModelScope.launch {
-        _sharedFlow.emit("SharedFlow")
+        errorCounter++
+        _sharedFlow.emit("Error $errorCounter")
     }
 
     fun onFlowClick() = flow<Int> {
